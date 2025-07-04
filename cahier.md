@@ -8,21 +8,21 @@
 - **Entrées** :
   - ID de l’adhérent
   - ID de l’exemplaire
-  - Type de prêt (sur place ou à domicile)
+  - Type de prêt (lecture sur place ou à domicile)
 
 ### Scénario nominal
 
-Le bibliothécaire sélectionne un adhérent et un exemplaire disponible pour effectuer le prêt.
+Le bibliothécaire sélectionne un adhérent valide et un exemplaire disponible, puis enregistre le prêt.
 
 ### Règles de gestion
 
-1. L’adhérent existe dans la base.
+1. L’adhérent existe dans la base de données.
 2. L’adhérent est abonné.
 3. L’adhérent est actif.
 4. L’adhérent n’est pas sanctionné.
 5. L’exemplaire est disponible.
-6. Le type de prêt est autorisé pour ce livre.
-7. Le livre est adapté à l’âge de l’adhérent (ex. : un livre +18 est interdit aux mineurs).
+6. Le type de prêt est compatible avec les règles du livre.
+7. Le contenu du livre est adapté à l’âge de l’adhérent (ex : livre +18 interdit aux mineurs).
 8. Le nombre de prêts à domicile en cours ne dépasse pas le quota autorisé selon le profil de l’adhérent.
 
 ### Scénarios alternatifs
@@ -38,36 +38,36 @@ Le bibliothécaire sélectionne un adhérent et un exemplaire disponible pour ef
 
 ### Résultat attendu
 
-- Le prêt est enregistré avec succès.
-- Un message d’erreur est affiché si une règle n’est pas respectée.
+- ✅ Le prêt est enregistré avec succès.
+- ❌ Un message d’erreur est affiché si une règle est violée.
 
 ---
 
 ## Fonctionnalité 2 : Prolonger un prêt
 
 - **Acteurs** :
-  - Adhérent (demande)
+  - Adhérent (effectue la demande)
   - Bibliothécaire (valide ou rejette)
-- **Entrée** : ID du prêt à prolonger
+- **Entrée** : ID du prêt concerné
 
 ### Scénario nominal
 
-L’adhérent demande une prolongation. Le bibliothécaire décide de la valider ou non.
+L’adhérent demande la prolongation d’un prêt. Le bibliothécaire analyse la demande et la valide ou la rejette.
 
 ### Règles de gestion
 
-1. L’adhérent n’est pas sanctionné.
-2. Le nombre de prolongations en cours n’excède pas le maximum autorisé selon le profil.
+1. L’adhérent ne doit pas être sanctionné.
+2. Le nombre de prolongations en cours ne doit pas dépasser le maximum autorisé selon le profil de l’adhérent.
 
 ### Scénarios alternatifs
 
 - Adhérent sanctionné
-- Nombre de prolongations dépassé
+- Nombre de prolongations autorisées dépassé
 
 ### Résultat attendu
 
-- Prolongation enregistrée
-- Prolongation refusée si une règle est violée
+- ✅ La prolongation est enregistrée.
+- ❌ La demande est rejetée si les conditions ne sont pas remplies.
 
 ---
 
@@ -77,43 +77,43 @@ L’adhérent demande une prolongation. Le bibliothécaire décide de la valider
 
 ### Scénario nominal
 
-L’adhérent restitue le livre et le bibliothécaire enregistre le retour.
+L’adhérent restitue le livre au bibliothécaire, qui enregistre le retour dans le système.
 
 ### Règles de gestion
 
-1. Si la date de retour est postérieure à la date de fin du prêt :
-   - L’adhérent est sanctionné pour une durée définie selon son profil.
-2. Si la date de fin du prêt tombe un jour férié ou un week-end :
-   - Un paramètre du système détermine si le retour est attendu avant ou après ce jour.
-   - Si le livre est rendu après le jour ouvrable suivant, l’adhérent est sanctionné.
+1. Si la **date de retour est postérieure à la date de fin de prêt** :
+   - Une sanction est appliquée selon la durée de retard et le profil de l’adhérent.
+2. Si la **date de fin du prêt tombe un jour férié ou un week-end** :
+   - Un **paramètre système** détermine si le retour est attendu avant ou après ce jour.
+   - Si l’adhérent rend le livre **au-delà du premier jour ouvrable suivant**, une sanction est appliquée.
 
 ### Résultat attendu
 
-- Le retour est enregistré.
-- Une sanction est appliquée en cas de retard injustifié.
+- ✅ Le retour est enregistré.
+- ⚠️ Une sanction est appliquée en cas de retard injustifié.
 
 ---
 
 ## Fonctionnalité 4 : Réserver un livre
 
 - **Acteurs** :
-  - Adhérent (demande)
-  - Bibliothécaire (valide ou rejette, puis transforme en prêt)
+  - Adhérent (formule la demande)
+  - Bibliothécaire (valide ou rejette, puis transforme la réservation en prêt)
 
 ### Scénario nominal
 
 1. L’adhérent consulte les exemplaires disponibles.
 2. Il choisit un exemplaire et une date de réservation.
-3. Le bibliothécaire valide ou rejette la réservation.
-4. À la date prévue, la réservation est transformée en prêt par le bibliothécaire.
+3. Le bibliothécaire valide ou rejette la demande.
+4. À la date prévue, si l’exemplaire est toujours disponible, la réservation est convertie en prêt.
 
 ### Règles de gestion
 
-- Les mêmes règles qu’un prêt classique doivent être respectées (profil valide, quota, non sanctionné, etc.).
+1. Le nombre de réservations actives (non encore transformées en prêt) ne doit pas dépasser le quota autorisé selon le profil de l’adhérent.
+2. Toutes les règles applicables à un prêt classique doivent être respectées :
+   - Adhérent actif, non sanctionné, abonné, quota de prêt respecté, etc.
 
 ### Résultat attendu
 
-- Réservation validée et transformée automatiquement en prêt si conforme.
-- Rejetée si une règle n’est pas respectée.
-
----
+- ✅ Réservation validée et transformée en prêt à la date prévue.
+- ❌ Réservation rejetée si une règle n’est pas respectée.
