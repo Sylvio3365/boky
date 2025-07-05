@@ -52,3 +52,10 @@ INSERT INTO
         idrole
     )
 VALUES (3, 'adherent1', 'adehrent', 3);
+
+CREATE TABLE profil (
+    idprofil INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(255)
+);
+
+CREATE TABLE adherent
