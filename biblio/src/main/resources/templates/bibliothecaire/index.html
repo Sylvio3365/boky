@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Menu Bibliothécaire</title>
+</head>
+
+<body>
+    <h1 th:text="${titre}">Menu du Bibliothécaire</h1>
+
+    <ul>
+        <li><a href="/livres">Gérer les livres</a></li>
+        <li><a href="/pret">Gérer les prêts</a></li>
+        <li><a href="/adherents">Voir les adhérents</a></li>
+        <li><a href="/logout">Se déconnecter</a></li>
+    </ul>
+</body>
+
+</html>
