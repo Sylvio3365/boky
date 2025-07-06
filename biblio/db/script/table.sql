@@ -143,3 +143,27 @@ VALUES ('admin', 'admin', 1),
         2
     ),
     ('adherent1', 'adherent', 3);
+
+INSERT INTO profil (nom) VALUES ('Étudiant'), ('Professeur');
+
+INSERT INTO adherent (nom, prenom, dtn, idprofil)
+VALUES 
+('Rakoto', 'Jean', '2000-04-12', 1),
+('Rasoanaivo', 'Lala', '1998-09-25', 2);
+
+INSERT INTO reglelivre (age_min) VALUES (10), (18);
+
+INSERT INTO livre (nom, auteur, idreglelivre)
+VALUES 
+('Introduction à Java', 'Michel Dupont', 1),
+('Spring Boot en Action', 'Claire Rabe', 2);
+
+INSERT INTO typepret (nom) VALUES ('Sur place'), ('À domicile');
+
+INSERT INTO exemplaire (numero, idtypepre, idlivre)
+VALUES 
+('EXJ001', 1, 1),
+('EXJ002', 2, 1),
+('EXSB001', 1, 2),
+('EXSB002', 2, 2);
+    
