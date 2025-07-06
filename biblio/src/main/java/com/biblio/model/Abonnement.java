@@ -22,12 +22,35 @@ public class Abonnement {
     @JoinColumn(name = "idadherent", nullable = false)
     private Adherent adherent;
 
-    public Integer getIdabonnement() { return idabonnement; }
-    public void setIdabonnement(Integer idabonnement) { this.idabonnement = idabonnement; }
-    public Integer getMois() { return mois; }
-    public void setMois(Integer mois) { this.mois = mois; }
-    public Integer getAnnee() { return annee; }
-    public void setAnnee(Integer annee) { this.annee = annee; }
-    public Adherent getAdherent() { return adherent; }
-    public void setAdherent(Adherent adherent) { this.adherent = adherent; }
+    public Integer getIdabonnement() {
+        return idabonnement;
+    }
+
+    public void setIdabonnement(Integer idabonnement) {
+        this.idabonnement = idabonnement;
+    }
+
+    public Integer getMois() {
+        return mois;
+    }
+
+    public void setMois(Integer mois) {
+        this.mois = mois;
+    }
+
+    public Integer getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(Integer annee) {
+        this.annee = annee;
+    }
+
+    public Adherent getAdherent() {
+        return adherent;
+    }
+
+    public void setAdherent(Adherent adherent) {
+        this.adherent = adherent;
+    }
 }

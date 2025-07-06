@@ -22,6 +22,17 @@ public class Regle {
     @JoinColumn(name = "idprofil", nullable = false)
     private Profil profil;
 
+    @Column(nullable = false)
+    private Integer nbjoursanction;
+
+    public Integer getNbjoursanction() {
+        return nbjoursanction;
+    }
+
+    public void setNbjoursanction(Integer nbjoursanction) {
+        this.nbjoursanction = nbjoursanction;
+    }
+
     // Getters and Setters
     public Integer getIdregle() {
         return idregle;

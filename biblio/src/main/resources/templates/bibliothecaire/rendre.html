@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Prêts non rendus</title>
+</head>
+
+<body>
+    <h1>Liste des prêts non rendus</h1>
+
+    <p th:text="${message}" style="color: green;"></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Prêt</th>
+                <th>Adhérent</th>
+                <th>Exemplaire</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pret : ${prets}">
+                <td th:text="${pret.idpret}"></td>
+                <td th:text="${pret.adherent.nom + ' ' + pret.adherent.prenom}"></td>
+                <td th:text="${pret.exemplaire.numero}"></td>
+                <td th:text="${pret.debut}"></td>
+                <td th:text="${pret.fin}"></td>
+                <td>
+                    <form th:action="@{'/rendu/rendre/' + ${pret.idpret}}" method="post">
+                        <button type="submit">Rendre</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

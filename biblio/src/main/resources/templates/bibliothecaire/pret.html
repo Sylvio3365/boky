@@ -8,19 +8,17 @@
 <body>
     <h1>Créer un nouveau prêt</h1>
 
-    <p th:text="${message}" style="color:red;"></p> <!-- Message d'erreur ou succès -->
-
     <form th:action="@{/pret/ajouter}" th:object="${pret}" method="post">
         <!-- Adhérent -->
         <label for="adherent">Adhérent :</label>
-        <select th:field="*{adherent.idadherent}">
+        <select th:field="*{adherent.idadherent}" required>
             <option value="">-- Sélectionner un adhérent --</option>
             <option th:each="a : ${adherents}" th:value="${a.idadherent}" th:text="${a.nom + ' ' + a.prenom}"></option>
         </select><br><br>
 
         <!-- Exemplaire -->
         <label for="exemplaire">Exemplaire :</label>
-        <select th:field="*{exemplaire.idexemplaire}">
+        <select th:field="*{exemplaire.idexemplaire}" required>
             <option value="">-- Sélectionner un exemplaire --</option>
             <option th:each="e : ${exemplaires}" th:value="${e.idexemplaire}"
                 th:text="${e.numero + ' - ' + e.livre.nom}"></option>
@@ -28,20 +26,19 @@
 
         <!-- Type de prêt -->
         <label for="typepret">Type de prêt :</label>
-        <select th:field="*{typepret.idtypepre}">
+        <select th:field="*{typepret.idtypepre}" required>
             <option value="">-- Sélectionner un type de prêt --</option>
             <option th:each="tp : ${typeprets}" th:value="${tp.idtypepre}" th:text="${tp.nom}"></option>
         </select><br><br>
 
-        <!-- Dates -->
-        <label for="debut">Date de début :</label>
-        <input type="date" th:field="*{debut}"><br>
-
-        <label for="fin">Date de fin :</label>
-        <input type="date" th:field="*{fin}"><br><br>
-
         <button type="submit">Valider</button>
     </form>
+
+    <!-- Message d'erreur -->
+    <p th:if="${message != null and #strings.startsWith(message, '❌')}" th:text="${message}" style="color:red;"></p>
+    <!-- Message de succès -->
+    <p th:if="${message != null and #strings.startsWith(message, '✅')}" th:text="${message}" style="color:green;"></p>
+
 </body>
 
 </html>

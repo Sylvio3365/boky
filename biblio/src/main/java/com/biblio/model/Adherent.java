@@ -1,6 +1,9 @@
 package com.biblio.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,15 +32,52 @@ public class Adherent {
     @JoinColumn(name = "idprofil", nullable = false)
     private Profil profil;
 
+    public int getAge() {
+        if (this.dtn == null)
+            return 0;
+        LocalDate birthDate = this.dtn.toLocalDate();
+        LocalDate today = LocalDate.now();
+        return Period.between(birthDate, today).getYears();
+    }
+
     // Getters and Setters
-    public Integer getIdadherent() { return idadherent; }
-    public void setIdadherent(Integer idadherent) { this.idadherent = idadherent; }
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
-    public String getPrenom() { return prenom; }
-    public void setPrenom(String prenom) { this.prenom = prenom; }
-    public Date getDtn() { return dtn; }
-    public void setDtn(Date dtn) { this.dtn = dtn; }
-    public Profil getProfil() { return profil; }
-    public void setProfil(Profil profil) { this.profil = profil; }
+    public Integer getIdadherent() {
+        return idadherent;
+    }
+
+    public void setIdadherent(Integer idadherent) {
+        this.idadherent = idadherent;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public Date getDtn() {
+        return dtn;
+    }
+
+    public void setDtn(Date dtn) {
+        this.dtn = dtn;
+    }
+
+    public Profil getProfil() {
+        return profil;
+    }
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
+    }
 }

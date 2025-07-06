@@ -90,7 +90,7 @@ L’adhérent restitue le livre au bibliothécaire, qui enregistre le retour dan
 ### Résultat attendu
 
 - ✅ Le retour est enregistré.
-- ⚠️ Une sanction est appliquée en cas de retard injustifié.
+- ⚠️ Une sanction est appliquée en cas de retard.
 
 ---
 
