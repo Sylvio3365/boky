@@ -24,12 +24,12 @@ public class RenduController {
     @Autowired
     private RenduService renduService;
 
-    @GetMapping("/non-rendus")
-    public String afficherPretsNonRendus(Model model) {
-        List<Pret> pretsNonRendus = pretService.findPretsNonRendus();
-        model.addAttribute("prets", pretsNonRendus);
-        return "bibliothecaire/rendre";
-    }
+    // @GetMapping("/non-rendus")
+    // public String afficherPretsNonRendus(Model model) {
+    //     List<Pret> pretsNonRendus = pretService.findPretsNonRendus();
+    //     model.addAttribute("prets", pretsNonRendus);
+    //     return "bibliothecaire/rendre";
+    // }
 
     @PostMapping("/rendre/{idpret}")
     public String rendrePret(@PathVariable Integer idpret, Model model) {
