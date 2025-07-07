@@ -19,51 +19,51 @@ import java.util.List;
 @RequestMapping("/pret")
 public class PretController {
 
-    @Autowired
-    private PretService pretService;
+    // @Autowired
+    // private PretService pretService;
 
-    @Autowired
-    private ExemplaireService exemplaireService;
+    // @Autowired
+    // private ExemplaireService exemplaireService;
 
-    @Autowired
-    private AdherentService adherentService;
+    // @Autowired
+    // private AdherentService adherentService;
 
-    @Autowired
-    private TypePretService typePretService;
+    // @Autowired
+    // private TypePretService typePretService;
 
-    @GetMapping("/form")
-    public String afficherFormulairePret(Model model) {
-        List<Exemplaire> exemplaires = exemplaireService.getAllExemplaires();
-        List<Adherent> adherents = adherentService.getAllAdherents();
-        List<TypePret> typeprets = typePretService.findAll();
+    // @GetMapping("/form")
+    // public String afficherFormulairePret(Model model) {
+    //     List<Exemplaire> exemplaires = exemplaireService.getAllExemplaires();
+    //     List<Adherent> adherents = adherentService.getAllAdherents();
+    //     List<TypePret> typeprets = typePretService.findAll();
 
-        model.addAttribute("exemplaires", exemplaires);
-        model.addAttribute("adherents", adherents);
-        model.addAttribute("typeprets", typeprets);
-        model.addAttribute("pret", new Pret());
-        model.addAttribute("message", "");
+    //     model.addAttribute("exemplaires", exemplaires);
+    //     model.addAttribute("adherents", adherents);
+    //     model.addAttribute("typeprets", typeprets);
+    //     model.addAttribute("pret", new Pret());
+    //     model.addAttribute("message", "");
 
-        return "bibliothecaire/pret"; // src/main/resources/templates/bibliothecaire/pret.html
-    }
+    //     return "bibliothecaire/pret"; // src/main/resources/templates/bibliothecaire/pret.html
+    // }
 
-    @PostMapping("/ajouter")
-    public String ajouterPret(@ModelAttribute Pret pret, Model model) {
+    // @PostMapping("/ajouter")
+    // public String ajouterPret(@ModelAttribute Pret pret, Model model) {
 
-        // Appel au service pour validation métier et enregistrement
-        String message = pretService.preterUnLivre(pret);
+    //     // Appel au service pour validation métier et enregistrement
+    //     String message = pretService.preterUnLivre(pret);
 
-        // Rafraîchir les listes pour réafficher le formulaire
-        List<Exemplaire> exemplaires = exemplaireService.getAllExemplaires();
-        List<Adherent> adherents = adherentService.getAllAdherents();
-        List<TypePret> typeprets = typePretService.findAll();
+    //     // Rafraîchir les listes pour réafficher le formulaire
+    //     List<Exemplaire> exemplaires = exemplaireService.getAllExemplaires();
+    //     List<Adherent> adherents = adherentService.getAllAdherents();
+    //     List<TypePret> typeprets = typePretService.findAll();
 
-        model.addAttribute("exemplaires", exemplaires);
-        model.addAttribute("adherents", adherents);
-        model.addAttribute("typeprets", typeprets);
-        model.addAttribute("pret", new Pret());
-        model.addAttribute("message", message);
+    //     model.addAttribute("exemplaires", exemplaires);
+    //     model.addAttribute("adherents", adherents);
+    //     model.addAttribute("typeprets", typeprets);
+    //     model.addAttribute("pret", new Pret());
+    //     model.addAttribute("message", message);
 
-        return "bibliothecaire/pret";
-    }
+    //     return "bibliothecaire/pret";
+    // }
 
 }
