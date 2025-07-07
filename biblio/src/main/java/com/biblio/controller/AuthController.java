@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import jakarta.servlet.http.HttpSession; // ou javax.servlet.http.HttpSession selon ta version
 import com.biblio.model.Utilisateur;
 import com.biblio.service.UtilisateurService;
 
@@ -18,13 +18,27 @@ public class AuthController {
     @Autowired
     private UtilisateurService utilisateurService;
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Supprimer toutes les données de session
+        return "redirect:/login?logout=true"; // Redirection avec message
+    }
+
     @GetMapping("/login")
-    public String afficherLoginPage(@RequestParam(required = false) String error, Model model) {
+    public String afficherLoginPage(@RequestParam(required = false) String error,
+            @RequestParam(required = false) String logout,
+            Model model) {
         model.addAttribute("message", "Bienvenue sur la page de connexion");
+
         if (error != null) {
             model.addAttribute("erreur", "Identifiants incorrects.");
         }
-        return "login/login";   
+
+        if (logout != null) {
+            model.addAttribute("info", "Vous avez été déconnecté avec succès.");
+        }
+
+        return "login/login";
     }
 
     @PostMapping("/login")
