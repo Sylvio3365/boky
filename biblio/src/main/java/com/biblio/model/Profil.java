@@ -12,7 +12,6 @@ public class Profil {
     @Column(nullable = false)
     private String nom;
 
-    // Getters and Setters
     public Integer getIdprofil() {
         return idprofil;
     }
