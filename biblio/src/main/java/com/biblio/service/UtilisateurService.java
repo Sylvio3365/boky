@@ -16,4 +16,8 @@ public class UtilisateurService {
     public Optional<Utilisateur> login(String username, String password) {
         return utilisateurRepository.findByUsernameAndPassword(username, password);
     }
+
+    public Utilisateur findById(int iduser) {
+        return utilisateurRepository.findById(iduser).orElse(null);
+    }
 }

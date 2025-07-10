@@ -14,6 +14,10 @@ public class ExemplaireService {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
+    public Exemplaire findById(int id) {
+        return exemplaireRepository.findById(id).orElse(null);
+    }
+
     public boolean estDisponible(Integer id) {
         return exemplaireRepository.isExemplaireDisponible(id);
     }

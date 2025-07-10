@@ -42,9 +42,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
         Optional<Utilisateur> utilisateur = utilisateurService.login(username, password);
+
         if (utilisateur.isPresent()) {
+            session.setAttribute("utilisateurConnecte", utilisateur.get());
             String role = utilisateur.get().getRole().getNom().toLowerCase();
             if (role.equals("bibliothecaire")) {
                 return "redirect:/bibliothecaire";

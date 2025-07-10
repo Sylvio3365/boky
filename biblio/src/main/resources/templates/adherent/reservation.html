@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Réserver un livre</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Réserver un livre</h1>
+
+    <!-- Message de succès ou d'erreur -->
+    <div th:if="${message}" th:text="${message}" style="color: green;"></div>
+    <div th:if="${erreur}" th:text="${erreur}" style="color: red;"></div>
+
+    <form th:action="@{/reserver/save}" method="post">
+        <label for="idexemplaire">Choisir un livre :</label>
+        <select name="idexemplaire" id="idexemplaire" required>
+            <option value="" disabled selected>Sélectionner un exemplaire</option>
+            <option th:each="exemplaire : ${exemplaires}" th:value="${exemplaire.idexemplaire}"
+                th:text="${exemplaire.numero + ' - ' + exemplaire.livre.nom}">
+            </option>
+        </select>
+        <br><br>
+        <label for="datepret">Date de début de prêt :</label>
+        <input type="date" name="datepret" id="datepret" required>
+        <br><br>
+        <button type="submit">Réserver</button>
+    </form>
+</body>
+
+</html>

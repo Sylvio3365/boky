@@ -18,10 +18,14 @@ public class AdherentService {
     @Autowired
     private AdherentRepository adherentRepository;
 
-    @Autowired 
+    @Autowired
     private SanctionRepository sanctionRepository;
 
-    private boolean estAdherentSanctionne(Adherent adherent) {
+    public Adherent findById(int id) {
+        return adherentRepository.findById(id).orElse(null);
+    }
+
+    public boolean estAdherentSanctionne(Adherent adherent) {
         Date today = Date.valueOf(LocalDate.now());
         return sanctionRepository.existsByAdherent_IdadherentAndDebutBeforeAndFinAfter(
                 adherent.getIdadherent(), today, today);

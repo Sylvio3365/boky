@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Réservations à valider</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Réservations du
+        <span th:text="${#dates.format(date, 'dd/MM/yyyy')}">[date]</span>
+    </h1>
+
+    <form th:action="@{/reserver/avalider}" method="get">
+        <label for="datepret">Changer la date :</label>
+        <input type="date" name="datepret" id="datepret" th:value="${#dates.format(date, 'yyyy-MM-dd')}" required>
+        <button type="submit">Afficher</button>
+    </form>
+
+    <br />
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Adhérent</th>
+                <th>Livre</th>
+                <th>Exemplaire</th>
+                <th>Date de réservation</th>
+                <th>Date de prêt</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resa : ${reservations}">
+                <td th:text="${resa.idreservation}">1</td>
+                <td th:text="${resa.adherent.nom + ' ' + resa.adherent.prenom}">Nom Adhérent</td>
+                <td th:text="${resa.exemplaire.livre.nom}">Titre du livre</td>
+                <td th:text="${resa.exemplaire.numero}">Ex123</td>
+                <td th:text="${#dates.format(resa.datereservation, 'dd/MM/yyyy')}">01/01/2025</td>
+                <td th:text="${#dates.format(resa.datepret, 'dd/MM/yyyy')}">02/01/2025</td>
+                <td>
+                    <form th:action="@{/reserver/valider}" method="post">
+                        <input type="hidden" name="id" th:value="${resa.idreservation}" />
+                        <button type="submit">Valider</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(reservations)}">
+                <td colspan="7" style="text-align: center;">Aucune réservation trouvée pour cette date.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
