@@ -6,7 +6,6 @@ import com.biblio.model.Profil;
 import com.biblio.model.Regle;
 import com.biblio.model.Rendu;
 import com.biblio.model.Sanction;
-import com.biblio.repository.AdherentRepository;
 import com.biblio.repository.PretRepository;
 import com.biblio.repository.RegleRepository;
 import com.biblio.repository.RenduRepository;
@@ -34,27 +33,20 @@ public class RenduService {
     private SanctionRepository sanctionRepository;
 
     public String rendrePretById(Integer idpret) {
-        // 1. Rechercher le prêt
         Pret pret = pretRepository.findById(idpret).orElse(null);
         if (pret == null) {
             return "❌ Prêt introuvable.";
         }
-
-        // 2. Vérifier s'il est déjà rendu
         boolean dejaRendu = renduRepository.existsByPret_Idpret(idpret);
         if (dejaRendu) {
             return "❌ Ce prêt a déjà été rendu.";
         }
-
-        // 3. Enregistrer le rendu
         Rendu rendu = new Rendu();
         rendu.setPret(pret);
         Date today = Date.valueOf(LocalDate.now());
         rendu.setDate(today);
 
-        // 4. Vérification de retard
         if (pret.getFin().before(today)) {
-            // Appliquer sanction
             Adherent adherent = pret.getAdherent();
             Profil profil = adherent.getProfil();
             Regle regle = regleRepository.findByProfil_Idprofil(profil.getIdprofil());
@@ -73,7 +65,6 @@ public class RenduService {
                     + " jours a été appliquée pour retard.";
         }
 
-        // 5. Enregistrement normal
         renduRepository.save(rendu);
         return "✅ Prêt rendu dans les délais.";
     }
